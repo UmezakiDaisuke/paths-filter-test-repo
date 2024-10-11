@@ -7,14 +7,27 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
-  # pull_request:
-  #   branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # Migrationファイルの存在チェック
+  check-migration-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check add migration files
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            migration-check:
+              - 'src/migration/**'
+
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on

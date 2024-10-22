@@ -43,6 +43,11 @@ jobs:
           filters: |
             migration-check:
               - 'src/migration/**'
+            migration-check-2:
+              - 'src/migration/2/**'
+    outputs:
+      migration-check: ${{ steps.filter.outputs.migration-check }}
+      migration-check-2: ${{ steps.filter.outputs.migration-check-2 }}
 
   # This workflow contains a single job called "build"
   build:

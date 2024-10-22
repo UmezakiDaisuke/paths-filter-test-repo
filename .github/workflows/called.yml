@@ -31,10 +31,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Get previous commit
+        id: prev-commit
+        run: echo "PREV_COMMIT=$(git rev-parse HEAD^)" >> $GITHUB_ENV
+
       - name: Check add migration files
         id: filter
         uses: dorny/paths-filter@v3
         with:
+          base: ${{ env.PREV_COMMIT }}
+          ref: HEAD
           filters: |
             migration-check:
               - 'src/migration/**'

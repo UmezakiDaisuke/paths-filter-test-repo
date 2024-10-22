@@ -42,7 +42,6 @@ jobs:
         uses: dorny/paths-filter@v3
         with:
           base: ${{ env.PREV_COMMIT }}
-          ref: HEAD
           filters: |
             migration-check:
               - 'src/migration/**'

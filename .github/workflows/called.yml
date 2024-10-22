@@ -4,6 +4,10 @@ on:
   workflow_call:
     # test的にinputsをあわせてみる
     inputs:
+      migration-check:
+        description: Migrationファイルの存在チェックを行うかどうか
+        type: boolean
+        required: true
       branch:
         description: デプロイ対象ブランチ
         type: string
@@ -21,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
+          echo "migration-check: ${{ inputs.migration-check }}"
           echo "branch: ${{ inputs.branch }}"
           echo "target: ${{ inputs.target }}"
 
